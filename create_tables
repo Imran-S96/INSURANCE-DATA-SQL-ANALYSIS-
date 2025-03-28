@@ -1,0 +1,33 @@
+CREATE TABLE customers (
+    customer_id VARCHAR PRIMARY KEY,
+    customer_name VARCHAR,
+    date_of_birth DATE,
+    gender VARCHAR
+);
+
+
+CREATE TABLE policies (
+    policy_id VARCHAR PRIMARY KEY,
+    customer_id VARCHAR REFERENCES customers(customer_id),
+    agent_id VARCHAR,
+    policy_type VARCHAR,
+    policy_start_date DATE,
+    policy_end_date DATE,
+    premium_amount NUMBER(10,2),
+    coverage_amount NUMBER(10,2),
+    payment_frequency VARCHAR,
+    region VARCHAR,
+    vehicle_type VARCHAR
+);
+
+
+CREATE TABLE claims (
+    claim_id VARCHAR PRIMARY KEY,
+    policy_id VARCHAR REFERENCES policies(policy_id),
+    claim_date DATE,
+    claim_amount NUMBER(10,2),
+    claim_status VARCHAR,
+    incident_type VARCHAR,
+    incident_description VARCHAR,
+    fraud_flag BOOLEAN
+);
